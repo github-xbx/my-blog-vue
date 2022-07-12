@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta name="author" content="墨白记,大白,沉静在编程">
+    <meta name="renderer" content="webkit">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: #34d9da;
+        }
+        
+        .arc {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border-top: 2px solid #fff;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            animation: rt 3s infinite linear;
+        }
+        
+        .arc::before {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border-top: 2px solid #fff;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            animation: rt 1.5s infinite linear reverse;
+            content: "";
+        }
+        
+        .arc::after {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border-top: 2px solid #fff;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            animation: rt 1s infinite linear reverse;
+            content: "";
+        }
+        
+        .loading h1 {
+            position: absolute;
+            height: 40px;
+            margin: auto;
+            top: 200px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 0.1em;
+            font-size: 20px;
+            font-weight: lighter;
+            color: #fff;
+        }
+        
+        .loading h1 span {
+            display: none;
+        }
+        
+        .loading h1::after {
+            animation: txt 5s infinite;
+            content: "";
+        }
+        
+        @keyframes rt {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes cw {
+            0% {
+                width: 0;
+                height: 0;
+            }
+            75% {
+                width: 40px;
+                height: 40px;
+            }
+            100% {
+                width: 0;
+                height: 0;
+            }
+        }
+        
+        @keyframes txt {
+            0% {
+                content: "LOADING.";
+            }
+            50% {
+                content: "LOADING..";
+            }
+            100% {
+                content: "LOADING...";
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+        <div class="loading">
+            <div class="arc"></div>
+            <h1><span>LOADING</span></h1>
+        </div>
+    </div>
+    <script crossorigin="anonymous" integrity="sha512-Y5dRZeUZxREh8ANA93rZYDAtjoxHwptgIB+d8W/H7cJOpce8V6VDhQjcBNmXzJOEQXRmQ/SrOVcmgl85yyDVww==" src="//lib.baomitu.com/echarts/4.9.0-rc.1/echarts-en.common.min.js"></script>
+    <!-- <script crossorigin="anonymous" integrity="sha512-sgjf2XQikbNM6rYK8HIvY8GnOY0WrXUkluoh71qBzH2Cdm5qLJpFLwX9zCO5lkG11k8oh89yzQ8SOqLlQjIYHw==" src="//lib.baomitu.com/echarts/5.0.0/echarts.common.min.js"></script> -->
+</body>
+
+</html>
