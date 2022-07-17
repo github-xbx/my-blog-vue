@@ -15,7 +15,8 @@ instance.interceptors.request.use(function(config) {
     //console.log(111111111111111111,config.url)
     if (url == 'api') {
         //console.log(store.state.user.token);
-        config.headers['Authorization'] = "Bearer "+store.state.user.token
+        //config.headers['Authorization'] = "Bearer "+store.state.user.token
+        config.headers['Authorization'] = store.state.user.token
     }
     config.headers['X-Requested-With'] = 'XMLHttpRequest'
     //config.headers['Content-Type'] = 'application/json'

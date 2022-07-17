@@ -13,9 +13,9 @@ const user = {
         userInfo(state, data) { //写入个人信息
             state.user = data.info
             Notification.success({
-                message: `欢迎回来~${data.info.name}`,
+                message: `欢迎回来~${data.info.username}`,
                 description: `上次登录时间:${data.time}`,
-                icon: < img src = { `${data.info.avatar_url}` }
+                icon: < img src = { `${data.info.header}` }
                 width = "60"
                 style = "position: absolute;width: 40px;border-radius: 50%;border: 2px solid rgba(223,223,223,0.3);" / >
             })
@@ -23,9 +23,9 @@ const user = {
         logOut(state) { //退出
             //console.log(state.user)
             Notification.success({
-                message: `退出成功~${state.user.name}`,
+                message: `退出成功~${state.user.username}`,
                 description: `欢迎下次登陆！`,
-                icon: < img src = { `${state.user.avatar_url}` }
+                icon: < img src = { `${state.user.header}` }
                 width = "60"
                 style = "position: absolute;width: 40px;border-radius: 50%;border: 2px solid rgba(223,223,223,0.3);" / >
             })
@@ -38,16 +38,28 @@ const user = {
              //localStorage.setItem("so_token", data);
             commit('setToken', data)
         },
-        async userInfo({ commit }, data) {
-            let res = http.get('/api/user/userInfo')
-            commit('userInfo', {
-                info: res.data,
-                time: data
+        async userInfo({ commit }) {
+            await http.get('/api/user/userInfo').then((res)=>{
+                    commit('userInfo', {
+                    info: res.object,
+                    time: res.object.lastLoginTime
+                })
             })
+
+
         },
-        async logOut({ commit }) {
-            await http.get('/apis/user/logout')
-            commit('logOut')
+        async logOut({ commit },data) {
+            await http.post('/api/user/logout',{"userId":data}).then((res)=>{
+                    if(res.code === 200 && res.object === true){
+                        commit('logOut')
+
+                    // eslint-disable-next-line no-empty
+                    }else {
+                        Notification.error({message: '错误提示',description:res.message})
+                    }
+
+                })
+
         },
     }
 }

@@ -66,6 +66,7 @@ import {
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
+import store from "../../../admin/store";
 export default {
   name: "login",
   components: {
@@ -105,11 +106,22 @@ export default {
         localStorage.setItem("current_page", route.path);
     }
     const giteeLogin =()=>{
+      close()
       let giteeUrl = process.env.VUE_APP_GITEE_OAUTH_LOGIN_URI;
-      //window.open(giteeUrl,'newwindow', 'height=800, width=1200, top=110, left=110, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no')
-      window.location.href = giteeUrl
+      window.open(giteeUrl,'newwindow', 'height=800, width=1200, top=110, left=110, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no')
+      //window.location.href = giteeUrl
+      //通过监听，父页面可以拿到子页面传递的token，父(前端页面)，子(小窗)
+      window.addEventListener('message', function (e) {
+        console.log(e.data)
+        store.commit("setToken",e.data)
+        store.dispatch("userInfo")
+        //localStorage.setItem("token",e.data)
+        //window.location.href = "/"
+      }, false)
+
+      //window.location.href = "/"
     }
-    https://graph.qq.com/oauth2.0/show?which=Login&display=pc&scope=get_idollist%2Cget_fanslist%2Cget_user_info%2Cadd_topic%2Cadd_t%2Cget_info%2Cadd_share&display=&response_type=code&redirect_uri=https%3A%2F%2Fpassport.iqiyi.com%2Fapis%2Fthirdparty%2Fncallback.action%3Ffrom%3D4%26source%3D4%26agenttype%3D1%26device_id%3D4073ebe78ceecc4b2a84fdfbe41bedde%26isframe%3D1%26redirect_url%3Dhttps%253A%252F%252Fpassport.iqiyi.com%252Fapis%252Fthirdparty%252Fncallback.action%253Ffrom%253D4%26verifyPhone%3D1%26ptid%3D01010021010000000000%26exception_url%3Dhttps%253A%252F%252Fwww.iqiyi.com%252Fthirdlogin%252Fclose.html%26success_url%3Dhttps%253A%252F%252Fwww.iqiyi.com%252Fthirdlogin%252Fclose.html%26is_reg_confirm%3D1%26fromSDK%3D1&client_id=206978&state=aZBY4BcAHh9nPOLBiwACxREj2v1BqsL9LViPC97RrIpbT4cI1XTRp%252Bhp1KhNXwWcg5nkCFuTkkek%252FLoOK1PXtA%253D%253D
+    //https://graph.qq.com/oauth2.0/show?which=Login&display=pc&scope=get_idollist%2Cget_fanslist%2Cget_user_info%2Cadd_topic%2Cadd_t%2Cget_info%2Cadd_share&display=&response_type=code&redirect_uri=https%3A%2F%2Fpassport.iqiyi.com%2Fapis%2Fthirdparty%2Fncallback.action%3Ffrom%3D4%26source%3D4%26agenttype%3D1%26device_id%3D4073ebe78ceecc4b2a84fdfbe41bedde%26isframe%3D1%26redirect_url%3Dhttps%253A%252F%252Fpassport.iqiyi.com%252Fapis%252Fthirdparty%252Fncallback.action%253Ffrom%253D4%26verifyPhone%3D1%26ptid%3D01010021010000000000%26exception_url%3Dhttps%253A%252F%252Fwww.iqiyi.com%252Fthirdlogin%252Fclose.html%26success_url%3Dhttps%253A%252F%252Fwww.iqiyi.com%252Fthirdlogin%252Fclose.html%26is_reg_confirm%3D1%26fromSDK%3D1&client_id=206978&state=aZBY4BcAHh9nPOLBiwACxREj2v1BqsL9LViPC97RrIpbT4cI1XTRp%252Bhp1KhNXwWcg5nkCFuTkkek%252FLoOK1PXtA%253D%253D
     const mVisible = computed(() => store.state.index.loginShow);
     const close = () => {
       store.commit("showLogin", false);

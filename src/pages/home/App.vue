@@ -205,8 +205,8 @@ export default {
       },
     ];
     const user = computed(() => {
-      const token = store.state.user.token;
-      console.log(token);
+      const token = store.state.user.user;
+      //console.log(token);
       if (token) {
         return true;
       }
@@ -222,10 +222,10 @@ export default {
           tag: "我的留言",
           link: "/user/message",
         },
-        // {
-        //   tag: "发表文章",
-        //   link: "/user/add",
-        // },
+        {
+          tag: "发表文章",
+          link: "/user/add",
+        },
         {
           tag: "系统消息",
           link: "/user/sysmess",
@@ -242,7 +242,7 @@ export default {
       store.commit('showLogin')
     }
     const logOut=()=>{
-      store.dispatch('logOut')
+      store.dispatch('logOut',store.state.user.user.id)
     }
     return {
       section,
