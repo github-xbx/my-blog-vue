@@ -187,7 +187,7 @@ export default {
     }
     const scroll = () => {
       const scrollTop = getScrollTop()
-      console.log(scrollTop);
+      //console.log(scrollTop);
       if (scrollTop >= props.height) {
         arriveHeight.value = true;
       } else {
@@ -196,7 +196,7 @@ export default {
     };
     const reSize = () => {
       const width = document.body.clientWidth;
-      console.log(width);
+      //console.log(width);
       if (width < props.width) {
         folding.value = true;
       } else {

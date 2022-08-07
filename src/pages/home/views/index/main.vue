@@ -7,7 +7,7 @@
           <!-- 左边轮播图 -->
           <el-carousel height="450px">
             <el-carousel-item v-for="item in picture" :key="item">
-              <el-image :src="item.url" :fit="cover">
+              <el-image :src="item.blogImg" :fit="cover">
                 <template #placeholder>
                   <div class="image-slot">
                     Loading<span class="dot">...</span>
@@ -17,12 +17,15 @@
             </el-carousel-item>
           </el-carousel>
         </div>
+
         <div class="picture_2">
           <div class="picture_2_top">
+
             <el-image
-              src="https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test.jpg"
+              :src="pictureRecommend[0].blogImg"
               :fit="cover"
             >
+
               <template #placeholder>
                 <div class="image-slot">
                   Loading<span class="dot">...</span>
@@ -32,7 +35,7 @@
           </div>
           <div class="picture_2_bottom">
             <el-image
-              src="https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test.jpg"
+              :src="pictureRecommend[1].blogImg"
               :fit="cover"
             >
               <template #placeholder>
@@ -449,6 +452,9 @@ import {
 } from "@ant-design/icons-vue";
 import Image from "@/components/image/image";
 import Skeleton from "@/components/skeleton/skeleton";
+import http from '@/utils/httpindex.js'
+import { getIndex } from "./main";
+import {ref} from "vue";
 
 export default {
   name: "Index",
@@ -464,7 +470,8 @@ export default {
     SearchOutlined,
     TagsOutlined,
     BarsOutlined,
-    
+    // eslint-disable-next-line vue/no-unused-components
+    http
   },
   setup() {
     const tabList = [
@@ -477,185 +484,86 @@ export default {
         id: 2,
       },
       {
-        name: "最热",
+        name: "收藏",
         id: 3,
       },
     ];
 
-    const picture = [
-      {
-        url: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test.jpg",
-      },
-      {
-        url: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test2.jpg",
-      },
-      {
-        url: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test.jpg",
-      },
-      {
-        url: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test2.jpg",
-      },
-    ];
-    const labelList = [
-      {
-        labelId: 1,
-        labelName: "spring boot",
-      },
-      {
-        labelId: 2,
-        labelName: "mybatis",
-      },
-    ];
-    const categoryList = [
-      {
-        categoryId: 1,
-        categoryName: "前端",
-      },
-      {
-        categoryId: 2,
-        categoryName: "后端",
-      },
-    ];
-    const store = useStore();
+    // const picture = [
+    //   {
+    //     url: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test.jpg",
+    //   },
+    //   {
+    //     url: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test2.jpg",
+    //   },
+    //   {
+    //     url: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test.jpg",
+    //   },
+    //   {
+    //     url: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test2.jpg",
+    //   },
+    // ];
+    // const labelList = [
+    //   {
+    //     labelId: 1,
+    //     labelName: "spring boot",
+    //   },
+    //   {
+    //     labelId: 2,
+    //     labelName: "mybatis",
+    //   },
+    // ];
 
-    store.dispatch("getCarousels");
-   
-    const list = [
-      {
-        blogId: 3,
-        blogUid: null,
-        blogTitle: "test002",
-        blogDescription: "测试试测试测试试测试测试试测试",
-        blogContent: null,
-        blogImg: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test.jpg",
-        blogState: null,
-        blogInsertTime: "2021-12-26 15:23:04",
-        blogTid: null,
-        seriesId: 1,
-        seriesName: "后端",
-        label: [
-          {
-            labelId: 2,
-            labelName: "git",
-          },
-          {
-            labelId: 1,
-            labelName: "svn",
-          },
-        ],
-      },
-      {
-        blogId: 3,
-        blogUid: null,
-        blogTitle: "test002",
-        blogDescription: "测试试测试测试试测试测试试测试",
-        blogContent: null,
-        blogImg: "https://guli-xbx.oss-cn-beijing.aliyuncs.com/myblog/test.jpg",
-        blogState: null,
-        blogInsertTime: "2021-12-26 15:23:04",
-        blogTid: null,
-        seriesId: 1,
-        seriesName: "后端",
-        label: [
-          {
-            labelId: 2,
-            labelName: "git",
-          },
-          {
-            labelId: 1,
-            labelName: "svn",
-          },
-        ],
-      },
-    ];
-    console.log("11111", list);
-    const info = [
-      {
-        url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-        title: "关于博客",
-        content:
-          "<p>这是一次重零开始的尝试、是自主学习的开始、是发现兴趣源头。</p><p>重零开始至博客2.0的重构，学无止境，继续出发！采用最新VUE 3.0架构，脱离UI库，自主编写UI组件！大三上完成博客前端重构</p><p>博客布局及样式参考——Teambition</p><p>组件样式来自于——Element、Ant</p><p>音乐播放器部分样式参考——APlayer</p>",
-        key: "about",
-        info: [
-          {
-            title: "Vue",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-          },
-          {
-            title: "Laravel",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-          },
-          {
-            title: "ByUI",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-          },
-        ],
-      },
-      {
-        url: "https://iconfont.alicdn.com/t/56f85d77-57a9-435b-b3ae-ec344ff25691.png",
-        title: "学习目标",
-        content:
-          "<p>只有不断的学习才能进步，而循序渐进才是我的学习思想。</p><p>有了明确的学习目标才能我有动力前进，在本项目重构之前，也荒废了一段时间，沉浸在自己的完成博客的喜悦中，殊不知这才是一个开始！</p>",
-        key: "study",
-        reverse: true,
-        info: [
-          {
-            title: "熟悉Vue生态",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-          },
-          {
-            title: "编写Vue UI库",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-          },
-          {
-            title: "了解Vue原理",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-          },
-          {
-            title: "待续...",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-          },
-        ],
-      },
-      {
-        url: "https://iconfont.alicdn.com/t/f524cdcc-89ee-4236-8e81-7e010a250d53.png",
-        title: "关于我",
-        content:
-          "<p>本着无聊的态度学了了Vue,也由此迷上了前端！</p><p>Baymax,00后程序小白！思维呆板！做事执着！学习能力一般，除非感兴趣！</p><p>掌握技能：Vue、Laravel、Java、Php、Mysql、Js、Ps  ……</p><p>可以在以下场所找到我！</p>",
-        key: "about-me",
-        info: [
-          {
-            title: "Gitee",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-            link: "https://gitee.com/baymaxsjj",
-          },
-          {
-            title: "GitHub",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-            link: "https://github.com/baymaxsjj",
-          },
-          {
-            title: "Csdn",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-            link: "https://blog.csdn.net/weixin_45294607",
-          },
-          {
-            title: "待续...",
-            url: "https://iconfont.alicdn.com/t/7dc3c4f4-0805-477d-9f7e-20f3ec164107.png",
-            link: "/",
-          },
-        ],
-      },
-    ];
+    //const store = useStore();
+
+    //store.dispatch("getCarousels");
+
+    const list = ref([])
+    const picture = ref([])
+    const pictureRecommend = ref([])
+    const categoryList = ref([])
+    const labelList = ref([])
+
+
+    const getIndex = () => {
+      http.get("api/blog/queryBlogByIndexRecommend").then((res) => {
+        picture.value = res.object[1] //轮播图
+        pictureRecommend.value = res.object[2] //图片推荐
+        list.value = res.object[3] //推荐列表
+
+      })
+    }
+    getIndex();
+
+    const getCategory = () => {
+      http.get("api/blog/queryCategoryAll").then((res) => {
+        categoryList.value = res.object
+      })
+
+    }
+    getCategory();
+
+    const getLabel = () => {
+      http.get("api/blog/queryLabelAll").then((res) => {
+        labelList.value = res.object
+      })
+    }
+    getLabel();
+
+
     return {
       list,
-      info,
       picture,
       tabList,
       labelList,
       categoryList,
+      pictureRecommend,
+      getIndex
     };
   },
+  beforeCreate() {
+    //this.list = getIndex()[3]
+  }
 };
 </script>
 <style lang="stylus">

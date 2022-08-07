@@ -43,9 +43,9 @@ const createMessage = {
     },
 
     show(options = {}) {
-        console.log('调用show方法')
+        //console.log('调用show方法')
         if (!this.vm) {
-            console.log(this.options)
+            //console.log(this.options)
             this.create()
         }
         this.vm.add(options)
@@ -55,7 +55,7 @@ const createMessage = {
             // }
     },
     close(key) {
-        console.log('-----close-----', key)
+        //console.log('-----close-----', key)
         this.vm.close(key)
     },
     format(type, config) {
@@ -63,9 +63,9 @@ const createMessage = {
         return op
     },
     open(config) {
-        console.log()
+        //console.log()
         const type = "info"
-        console.log(this.format(type, config))
+        //console.log(this.format(type, config))
         return this.show(this.format(type, config))
     },
     success(config) {

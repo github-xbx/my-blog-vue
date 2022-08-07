@@ -39,14 +39,14 @@ const utils = {
     },
 
     isInContainer(el, container, offset = 0) {
-        console.log(offset)
+       //console.log(offset)
             //元素位置
         const elTop = el.offsetTop
             //滚动位置
         const containerTop = this.getScroll(container, true)
         const isWindow = container === window
         const containerHeight = isWindow ? document.documentElement.clientHeight : container.clientHeight
-        console.log(elTop, containerTop, containerHeight)
+        //console.log(elTop, containerTop, containerHeight)
         if ((elTop > containerTop) && (elTop < containerTop + containerHeight + offset)) {
             return true
         }

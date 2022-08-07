@@ -34,7 +34,7 @@ instance.interceptors.response.use(function(response) {
         if (response.headers.authorization) {
             store.dispatch("setToken", response.headers.authorization);
         }
-        console.log("111"+response.status)
+        //console.log("111"+response.status)
         if (response.data.status == 'success') {
             return Promise.resolve(response.data)
         } else if (response.data.status == 'error') {

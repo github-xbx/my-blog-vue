@@ -10,7 +10,7 @@ import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
 
 router.beforeEach((to, from, next) => {
-    console.log(from)
+   // console.log(from)
     if (to.meta.title) {
         document.title = to.meta.title
     }

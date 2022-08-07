@@ -79,7 +79,7 @@ export default {
       return style;
     },
     maxCount(type) {
-      console.log(type);
+      //console.log(type);
       const list = Object.keys(this.types[type]);
       const length = list.length;
       if (this.defaults.maxCount && length >= this.defaults.maxCount) {

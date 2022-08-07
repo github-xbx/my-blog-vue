@@ -21,7 +21,7 @@ const user = {
             })
         },
         logOut(state) { //退出
-            //console.log(state.user)
+
             Notification.success({
                 message: `退出成功~${state.user.username}`,
                 description: `欢迎下次登陆！`,

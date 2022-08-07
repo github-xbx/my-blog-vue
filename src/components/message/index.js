@@ -25,7 +25,7 @@ const createMessage = {
     },
 
     show(options = {}) {
-        console.log(this.mess)
+        //console.log(this.mess)
         if (!this.vm) {
             this.create()
         }
@@ -36,7 +36,7 @@ const createMessage = {
         this.vm.close(key)
     },
     format(type, config, duration, onClose) {
-        console.log(typeof config)
+        //console.log(typeof config)
         if (typeof config != 'object') {
             config = {
                 type: type,
@@ -59,7 +59,7 @@ const createMessage = {
 
     },
     open(config, duration, onClose) {
-        console.log()
+        //console.log()
         const type = "info"
         return this.show(this.format(type, config, duration, onClose))
     },

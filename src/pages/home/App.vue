@@ -95,7 +95,7 @@ export default {
   },
   setup() {
   const route=useRoute()
-  console.log(route)
+  //console.log(route)
     const nav =reactive( {
       normal: {
           "background-color": "#fff",
