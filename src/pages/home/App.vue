@@ -2,7 +2,7 @@
   <div id="nav">
     <Navbar
       class="navbar"
-      title="My-Blog"
+      title="MY-BLOG"
       :section="section"
       :style="nav"
     >
@@ -264,8 +264,8 @@ export default {
   .navbar {
     .logo {
       display: block;
-      height: 28.5px;
-      width: 40px;
+      height: 30px;
+      width: 30px;
       background: url('~@/assets/logo.svg') no-repeat;
     }
 

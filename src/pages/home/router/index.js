@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Index from '../views/index/main.vue'
-const name = "My-Blog"
+const name = "MY-BLOG"
 
 const routes = [{
     path: '/',
