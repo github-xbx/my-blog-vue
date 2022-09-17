@@ -53,7 +53,10 @@
     </Navbar>
 
     <router-view v-slot="{ Component }">
-        <transition name="fade">
+        <transition  mode="out-in" :duration="500"
+                     enter-active-class="animate__animated animate__fadeIn"
+                     leave-active-class="animate__animated animate__fadeOut">
+
           <keep-alive :include="['Blog', 'Index', 'Friends','Project']">
                 <component :is="Component" />
           </keep-alive>
@@ -82,6 +85,8 @@ import { UpOutlined } from "@ant-design/icons-vue";
 import Loagin from './views/login/login'
 import Image from '../../components/image/image.vue';
 import { useRoute } from 'vue-router';
+import "animate.css/animate.min.css";
+
 export default {
   components: {
     BackTop,
