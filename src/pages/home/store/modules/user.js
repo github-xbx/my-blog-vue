@@ -16,8 +16,8 @@ const user = {
                 message: `欢迎回来~${data.username}`,
                 description: `上次登录时间:${data.lastLoginTime}`,
                 icon: < img src = { `${data.header}` }
-                width = "60"
-                style = "position: absolute;width: 40px;border-radius: 50%;border: 2px solid rgba(223,223,223,0.3);" / >
+                width = '60'
+                style = 'position: absolute;width: 40px;border-radius: 50%;border: 2px solid rgba(223,223,223,0.3);' />
             })
         },
         logOut(state) { //退出
@@ -27,7 +27,7 @@ const user = {
                 description: `欢迎下次登陆！`,
                 icon: < img src = { `${state.user.header}` }
                 width = "60"
-                style = "position: absolute;width: 40px;border-radius: 50%;border: 2px solid rgba(223,223,223,0.3);" / >
+                style = "position: absolute;width: 40px;border-radius: 50%;border: 2px solid rgba(223,223,223,0.3);" />
             })
             state.token = ''
             state.user = ''

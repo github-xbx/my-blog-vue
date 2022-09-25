@@ -14,9 +14,10 @@ instance.interceptors.request.use(function(config) {
     let url = config.url.substring(1, 4)
     //console.log(111111111111111111,config.url)
     if (url == 'api') {
-        //console.log(store.state.user.token);
-        //config.headers['Authorization'] = "Bearer "+store.state.user.token
-        config.headers['Authorization'] = store.state.user.token
+
+        config.headers['Authorization'] = "bearer "+store.state.user.token
+        console.log(config.headers);
+        //config.headers['Authorization'] = store.state.user.tokenxxxx
     }
     config.headers['X-Requested-With'] = 'XMLHttpRequest'
     //config.headers['Content-Type'] = 'application/json'
