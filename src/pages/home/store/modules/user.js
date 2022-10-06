@@ -35,27 +35,20 @@ const user = {
     },
     actions: {
         setToken({ commit }, data) {
-             //localStorage.setItem("so_token", data);
+
             commit('setToken', data)
         },
         userInfo({ commit },data) {
 
             commit('userInfo',data)
-            // await http.get('/api/user/userInfo').then((res)=>{
-            //         commit('userInfo', {
-            //         info: res.object,
-            //         time: res.object.lastLoginTime
-            //     })
-            // })
-
 
         },
-        async logOut({ commit },data) {
-            await http.post('/api/user/logout',{"userId":data}).then((res)=>{
+        async logOut({ commit }) {
+            await http.post('/api/user/logout').then((res)=>{
                     if(res.code === 200 && res.object === true){
+                        console.log(res)
                         commit('logOut')
 
-                    // eslint-disable-next-line no-empty
                     }else {
                         Notification.error({message: '错误提示',description:res.message})
                     }
