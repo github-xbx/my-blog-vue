@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { useRoute } from "vue-router";
 import http from '@/utils/httpindex.js'
+import store from '@/pages/home/store'
 
 function getArticleList() {
     const current_page = ref(0)
@@ -22,7 +23,7 @@ function getArticleList() {
             current_page.value += 1
             loading.value = true
             //获取博客信息请求
-            http.get(`/api/blog/getBlogPage/${current_page.value}${type}`)
+            http.get(`/api/blog/queryUserBlogInfo/${store.state.user.user.id}/${current_page.value}${type}`)
                 .then(function(res) {
                     
                     if (res.object.list.length != 0) {
